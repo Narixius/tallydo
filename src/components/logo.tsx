@@ -1,11 +1,12 @@
 import { CheckCircleOutline } from 'heroicons-react'
 import React from 'react'
+import './logo.css'
 
 function Logo() {
     return (
-        <h1 className="font-bold text-2xl tracking-wide">
+        <h1 className="font-bold text-2xl tracking-normal text-white">
             Tallyd
-            <CheckCircleOutline className="inline-block" />
+            <CheckCircleOutline size={20} className="inline-block" />
         </h1>
     )
 }

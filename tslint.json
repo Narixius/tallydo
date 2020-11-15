@@ -5,5 +5,17 @@
 		"tslint-microsoft-contrib",
 		"tslint-consistent-codestyle",
 		"tslint-config-prettier"
-	]
+	],
+	"rules": {
+		"import-name": [
+			true,
+			null,
+			{},
+			null,
+			{
+				"ignoreExternalModule": false,
+				"case": "any-case"
+			}
+		]
+	}
 }

@@ -6,22 +6,18 @@ import { Todo, TodoArray } from '../../redux/todo'
 import { AddTodo } from '../../redux/todo/actions'
 import Logo from '../logo'
 
-const mapStateToProps = ({ todos }: RootState) => {
-    return { todos }
-}
 const mapDispatchToProps = { AddTodo }
 
 type Props = {
     AddTodo: typeof AddTodo
-    todos: TodoArray
 }
 
-function TodoAdder({ AddTodo, todos }: Props) {
+function TodoAdder({ AddTodo }: Props) {
     const titleInput = React.createRef<HTMLInputElement>()
     const [value, setValue] = React.useState('')
 
-    const AddTodoHandler = (): void => {
-        AddTodo(new Todo(value, '', false))
+    const addTodoHandler = (): void => {
+        AddTodo(new Todo(value, '', new Date()))
         setValue('')
         titleInput.current!.value = ''
     }
@@ -35,19 +31,17 @@ function TodoAdder({ AddTodo, todos }: Props) {
         e: React.KeyboardEvent<HTMLInputElement>
     ): void => {
         if (e.key === 'Enter') {
-            AddTodoHandler()
+            addTodoHandler()
         }
     }
-    const getTodoList = todos.map((item) => {
-        return <p className="text-white">{item.getTitle()}</p>
-    })
+
     return (
-        <div className="bg-black-blue lg:p-5">
+        <div className="p-5 md:w-1/2">
             <Logo />
-            <h2 className="text-3xl font-bold text-white lg:mt-10">
+            <h2 className="text-3xl font-bold text-white lg:mt-10 mt-5">
                 What’s you plan to do?
             </h2>
-            <p className="text-gray-500 font-medium text-sm lg:mt-2">
+            <p className="text-gray-500 font-medium text-sm lg:mt-2 mt-1">
                 Add you plan, so you never forget the works!
             </p>
             <div className="inputfields mt-8">
@@ -61,7 +55,7 @@ function TodoAdder({ AddTodo, todos }: Props) {
                 />
                 <div className="flex flex-row-reverse w-full mt-4">
                     <button
-                        onClick={AddTodoHandler}
+                        onClick={addTodoHandler}
                         className="add font-medium flex text-gray-800 px-3 py-1 rounded-md bg-white focus:outline-none"
                     >
                         Add
@@ -69,9 +63,8 @@ function TodoAdder({ AddTodo, todos }: Props) {
                     </button>
                 </div>
             </div>
-            {getTodoList}
         </div>
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoAdder)
+export default connect(null, mapDispatchToProps)(TodoAdder)

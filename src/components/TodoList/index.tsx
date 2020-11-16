@@ -1,37 +1,31 @@
+import { groupBy } from 'lodash'
 import React from 'react'
 import { connect } from 'react-redux'
-import { RootState } from '../../redux/index'
+import { RootState } from '../../redux'
 import { Todo, TodoArray } from '../../redux/todo'
 import { UpdateTodo } from '../../redux/todo/actions'
-import TodoItem from './TodoItem'
-
+import TodoGroup from './TodoGroup'
 const mapStateToProps = ({ todos }: RootState) => {
     return { todos }
 }
 const mapDispatchToProps = { UpdateTodo }
 
 type Props = {
-    UpdateTodo: typeof UpdateTodo
     todos: TodoArray
 }
 
-function TodoList({ todos, UpdateTodo }: Props) {
-    const todoCheckedHandler = (item: Todo) => {
-        let v = true
-        if (item.isChecked()) { v = false }
-        item.setChecked(v)
-
-        UpdateTodo(item)
-    }
-    const getTodoList = todos.map((item) => {
+function TodoList({ todos }: Props) {
+    const groups = groupBy(todos, (todo: Todo) => {
+        const date = todo.getDueDate()
         return (
-            <TodoItem
-                onTodoCheck={todoCheckedHandler}
-                todo={item}
-                key={item.getId()}
-            />
+            date.getFullYear() +
+            '-' +
+            (date.getMonth() + 1) +
+            '-' +
+            (date.getDay() + 1)
         )
     })
+
     return (
         <div className="md:w-1/2">
             <div className=" h-full p-5">
@@ -43,7 +37,9 @@ function TodoList({ todos, UpdateTodo }: Props) {
                         “It's time to start living the life you've imagined”
                         <span className="text-xs">- Henry James</span>
                     </p>
-                    <div className="list mt-5">{getTodoList}</div>
+                    <div className="list mt-5">
+                        <TodoGroup groups={groups} />
+                    </div>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@ import React from 'react'
 import { Todo } from '../../redux/todo/index'
 import './TodoItem.css'
 
-function todoItem({
+function TodoItem({
     todo,
     onTodoCheck,
 }: {
@@ -25,4 +25,4 @@ function todoItem({
     )
 }
 
-export default todoItem
+export default TodoItem

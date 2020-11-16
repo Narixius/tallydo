@@ -1,24 +1,27 @@
 import { ADD,TodoActions, UPDATE } from './actions';
 
 export class Todo {
-	private static baseId = 0;
-	private id:number;
-	 private isCompleted:boolean;
+	private static baseId:number = 0;
+	private readonly id:number;
+	private isCompleted:boolean;
 	constructor(private title:string, private description: string, private dueDate: Date){
 		this.id = ++Todo.baseId;
 		this.isCompleted = false
 	}
-	public getTitle(){
+	public getTitle():string{
 		return this.title;
 	}
-	public getId(){
+	public getId():number{
 		return this.id
 	}
-	public isChecked(){
+	public isChecked():boolean{
 		return this.isCompleted
 	}
-	public setChecked(v:boolean){
+	public setChecked(v:boolean):void{
 		this.isCompleted = v;
+	}
+	public getDueDate():Date{
+		return this.dueDate;
 	}
 }
 

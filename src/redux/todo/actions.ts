@@ -17,4 +17,17 @@ export function AddTodo(todo: Todo): IAddTodo {
   };
 }
 
-export type TodoActions = IAddTodo;
+export const UPDATE = 'UPDATE';
+interface IUpdateTodo extends IAction {
+  type: typeof UPDATE;
+  payload: Todo;
+}
+
+export function UpdateTodo(todo: Todo): IUpdateTodo {
+  return {
+    type: UPDATE,
+    payload: todo,
+  };
+}
+
+export type TodoActions = IAddTodo | IUpdateTodo;

@@ -15,6 +15,13 @@ function TodoAdder({ AddTodo }: Props) {
     const titleInput = React.createRef<HTMLInputElement>()
     const [value, setValue] = React.useState('')
 
+    // function randomDate(start: Date, end: Date) {
+    //     return new Date(
+    //         start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    //     )
+    // }
+    // randomDate(new Date(2020, 11, 15), new Date())
+
     const addTodoHandler = (): void => {
         AddTodo(new Todo(value, '', new Date()))
         setValue('')

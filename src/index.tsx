@@ -15,11 +15,9 @@ const composeEnhancers =
 const store = createStore(rootState, composeEnhancers)
 
 reactDom.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </React.StrictMode>,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('root')
 )
 

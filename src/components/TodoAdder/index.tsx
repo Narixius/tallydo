@@ -1,9 +1,8 @@
 import { ArrowNarrowRight } from 'heroicons-react'
 import React from 'react'
 import { connect } from 'react-redux'
-import { RootState } from '../../redux/index'
-import { Todo, TodoArray } from '../../redux/todo'
-import { AddTodo } from '../../redux/todo/actions'
+import { Todo } from '../../store/todo'
+import { AddTodo } from '../../store/todo/actions'
 import Logo from '../logo'
 
 const mapDispatchToProps = { AddTodo }

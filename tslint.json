@@ -4,7 +4,7 @@
 		"tslint-eslint-rules",
 		"tslint-microsoft-contrib",
 		"tslint-consistent-codestyle",
-		"tslint-config-prettier"
+		"tslint-config-prettier",
 	],
 	"rules": {
 		"import-name": [
@@ -15,6 +15,16 @@
 			{
 				"ignoreExternalModule": false,
 				"case": "any-case"
+			}
+		],
+		"no-implicit-dependencies": [
+			true,
+			{
+				"dev": true,
+				"optional": true,
+				"allow": [
+					"@"
+				] // I like "allow" as the exception name, but ditch it if it conflicts with established conventions
 			}
 		]
 	}

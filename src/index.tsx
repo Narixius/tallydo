@@ -2,9 +2,9 @@ import React from 'react'
 import reactDom from 'react-dom'
 import { Provider } from 'react-redux'
 import { compose, createStore } from 'redux'
+import { rootState } from './store'
 import App from './App'
 import './index.css'
-import { rootState } from './redux'
 import reportWebVitals from './reportWebVitals'
 
 const composeEnhancers =

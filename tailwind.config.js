@@ -11,6 +11,7 @@ module.exports = {
         extend: {
             colors: {
                 'black-blue': '#21253F',
+                'active-todo': '#F3F3F3',
             },
         },
     },

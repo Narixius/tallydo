@@ -1,13 +1,16 @@
 import { groupBy } from 'lodash'
 import React from 'react'
 import { connect } from 'react-redux'
-import { RootState } from '../../redux'
-import { Todo, TodoArray } from '../../redux/todo'
-import { UpdateTodo } from '../../redux/todo/actions'
+import { RootState } from '../../store'
+import { Todo, TodoArray } from '../../store/todo'
+import { UpdateTodo } from '../../store/todo/actions'
 import TodoGroup from './TodoGroup'
+import dayjs from 'dayjs'
+
 const mapStateToProps = ({ todos }: RootState) => {
     return { todos }
 }
+
 const mapDispatchToProps = { UpdateTodo }
 
 type Props = {
@@ -15,16 +18,9 @@ type Props = {
 }
 
 function TodoList({ todos }: Props) {
-    const groups = groupBy(todos, (todo: Todo) => {
-        const date = todo.getDueDate()
-        return (
-            date.getFullYear() +
-            '-' +
-            (date.getMonth() + 1) +
-            '-' +
-            (date.getDay() + 1)
-        )
-    })
+    const groups = groupBy(todos, (todo: Todo) =>
+        dayjs(todo.getDueDate()).format('DD-MM-YYYY')
+    )
 
     return (
         <div className="md:w-1/2">

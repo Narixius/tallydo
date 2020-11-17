@@ -63,16 +63,18 @@ function Dates({ onDateChange }: { onDateChange(date: Date): void }) {
             </div>
 
             {showCalendar && (
-                <div className="calendar absolute w-full h-full top-0 flex justify-center items-center">
-                    <DayPicker
-                        numberOfMonths={1}
-                        onDayClick={(e) => {
-                            setSelectedDate('customDate')
-                            setCustomDate(e.toDate())
-                            onDateChange(e.toDate())
-                            setShowCalendar(false)
-                        }}
-                    />
+                <div className="relative mt-1 calendar">
+                    <div className="calendar -mt-32 absolute w-full flex justify-center items-center">
+                        <DayPicker
+                            numberOfMonths={1}
+                            onDayClick={(e) => {
+                                setSelectedDate('customDate')
+                                setCustomDate(e.toDate())
+                                onDateChange(e.toDate())
+                                setShowCalendar(false)
+                            }}
+                        />
+                    </div>
                 </div>
             )}
         </div>

@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import { connect } from 'react-redux'
 import { UpdateTodo } from '../../store/todo/actions'
 import { Todo } from '../../store/todo/index'
@@ -94,24 +94,32 @@ function TodoGroup({ groups, UpdateTodo }: Props) {
 
     return (
         <div className="todo-groups">
-            {Object.keys(groups).map((groupName: string) => {
-                return (
-                    <div className="todoGroup mb-10" key={groupName}>
-                        <span className="mb-2 block font-bold">
-                            {parseGroupName(groupName)}
-                        </span>
-                        <FlipMove
-                            staggerDurationBy="30"
-                            duration={200}
-                            appearAnimation="accordionVertical"
-                            enterAnimation="accordionVertical"
-                            leaveAnimation="accordionVertical"
-                        >
-                            {groupTodos(groups[groupName])}
-                        </FlipMove>
-                    </div>
-                )
-            })}
+            <FlipMove
+                staggerDurationBy="30"
+                duration={200}
+                appearAnimation="accordionVertical"
+                enterAnimation="accordionVertical"
+                leaveAnimation="accordionVertical"
+            >
+                {Object.keys(groups).map((groupName: string) => {
+                    return (
+                        <div className="todoGroup mb-10" key={groupName}>
+                            <span className="mb-2 block font-bold">
+                                {parseGroupName(groupName)}
+                            </span>
+                            <FlipMove
+                                staggerDurationBy="30"
+                                duration={200}
+                                appearAnimation="accordionVertical"
+                                enterAnimation="accordionVertical"
+                                leaveAnimation="accordionVertical"
+                            >
+                                {groupTodos(groups[groupName])}
+                            </FlipMove>
+                        </div>
+                    )
+                })}
+            </FlipMove>
         </div>
     )
 }

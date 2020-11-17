@@ -4,17 +4,18 @@ import { connect } from 'react-redux'
 import { Todo } from '../../store/todo'
 import { AddTodo } from '../../store/todo/actions'
 import Logo from '../logo'
+import Dates from './Dates'
 
 const mapDispatchToProps = { AddTodo }
 
 type Props = {
     AddTodo: typeof AddTodo
 }
+let selectedDate = new Date()
 
 function TodoAdder({ AddTodo }: Props) {
     const titleInput = React.createRef<HTMLInputElement>()
     const [value, setValue] = React.useState('')
-
     // function randomDate(start: Date, end: Date) {
     //     return new Date(
     //         start.getTime() + Math.random() * (end.getTime() - start.getTime())
@@ -23,7 +24,7 @@ function TodoAdder({ AddTodo }: Props) {
     // randomDate(new Date(2020, 11, 15), new Date())
 
     const addTodoHandler = (): void => {
-        AddTodo(new Todo(value, '', new Date()))
+        AddTodo(new Todo(value, '', selectedDate))
         setValue('')
         titleInput.current!.value = ''
     }
@@ -40,9 +41,12 @@ function TodoAdder({ AddTodo }: Props) {
             addTodoHandler()
         }
     }
+    const onDateChange = (date: Date): void => {
+        selectedDate = date
+    }
 
     return (
-        <div className="p-5 md:w-1/2">
+        <div className="p-5 md:w-1/2 relative">
             <Logo />
             <h2 className="text-3xl font-bold text-white lg:mt-10 mt-5">
                 What’s you plan to do?
@@ -68,6 +72,9 @@ function TodoAdder({ AddTodo }: Props) {
                         <ArrowNarrowRight />
                     </button>
                 </div>
+            </div>
+            <div>
+                <Dates onDateChange={onDateChange} />
             </div>
         </div>
     )

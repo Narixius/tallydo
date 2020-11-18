@@ -4,7 +4,7 @@ interface IAction {
 	type: string
 }
 
-export const ADD = 'ADD';
+export const ADD = 'ADD_TODO';
 interface IAddTodo extends IAction {
   type: typeof ADD;
   payload: Todo;
@@ -17,7 +17,7 @@ export function AddTodo(todo: Todo): IAddTodo {
   };
 }
 
-export const UPDATE = 'UPDATE';
+export const UPDATE = 'UPDATE_TODO';
 interface IUpdateTodo extends IAction {
   type: typeof UPDATE;
   payload: Todo;

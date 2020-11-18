@@ -5,7 +5,6 @@ import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
 import './Dates.css'
 import { DayPicker } from 'react-dates'
-import { spawn } from 'child_process'
 
 function Dates({ onDateChange }: { onDateChange(date: Date): void }) {
     const [selectedDate, setSelectedDate] = React.useState('today')
@@ -15,7 +14,7 @@ function Dates({ onDateChange }: { onDateChange(date: Date): void }) {
     function generateClassName(fieldName: string) {
         let defaultClass =
             'dateTag rounded-md text-sm text-white font-bold px-3 py-1 mr-3 opacity-25 cursor-pointer'
-        if (fieldName == selectedDate) return defaultClass + ' active'
+        if (fieldName === selectedDate) return defaultClass + ' active'
         else return defaultClass
     }
     return (
@@ -64,7 +63,7 @@ function Dates({ onDateChange }: { onDateChange(date: Date): void }) {
 
             {showCalendar && (
                 <div className="relative mt-1 calendar">
-                    <div className="calendar -mt-32 absolute w-full flex justify-center items-center">
+                    <div className="calendar -mt-32 absolute z-50 w-full flex justify-center items-center">
                         <DayPicker
                             numberOfMonths={1}
                             onDayClick={(e) => {

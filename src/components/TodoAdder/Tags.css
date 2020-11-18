@@ -1,0 +1,12 @@
+.removeTodoAction {
+    /* display: none; */
+    width: 0px;
+    transform: scale(0);
+    transition: all 0.2s ease-out;
+}
+.tag:hover .removeTodoAction {
+    /* display: inline-block; */
+    width: auto;
+    transform: scale(1);
+    margin-left: 0.5rem;
+}

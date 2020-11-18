@@ -1,10 +1,10 @@
 import { ADD,TodoActions, UPDATE } from './actions';
-
+import {Tag} from "../tag"
 export class Todo {
 	private static baseId:number = 0;
 	private readonly id:number;
 	private isCompleted:boolean;
-	constructor(private title:string, private description: string, private dueDate: Date){
+	constructor(private title:string, private description: string, private dueDate: Date, private tags: Tag[]){
 		this.id = ++Todo.baseId;
 		this.isCompleted = false
 	}
@@ -22,6 +22,9 @@ export class Todo {
 	}
 	public getDueDate():Date{
 		return this.dueDate;
+	}
+	public getTags():Tag[]{
+		return this.tags
 	}
 }
 

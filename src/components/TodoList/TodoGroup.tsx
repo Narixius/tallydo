@@ -40,14 +40,14 @@ function TodoGroup({ groups, UpdateTodo }: Props) {
     groups = clonedGroups
 
     // sort by alphabet
-    Object.keys(groups).map((key) => {
+    Object.keys(groups).forEach((key) => {
         groups[key] = sortBy(groups[key], (item) => {
             return item.getTitle()
         })
     })
 
     // Sort by done/undone todos
-    Object.keys(groups).map((key) => {
+    Object.keys(groups).forEach((key) => {
         groups[key] = sortBy(groups[key], (item) => {
             return item.isChecked()
         })

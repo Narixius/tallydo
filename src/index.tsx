@@ -7,12 +7,21 @@ import App from './App'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
 
+import { defaultTags } from './store/tag/index'
+
 const composeEnhancers =
     ((window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
         (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()) ||
     compose
 
-const store = createStore(rootState, composeEnhancers)
+const store = createStore(
+    rootState,
+    {
+        todos: [],
+        tags: defaultTags,
+    },
+    composeEnhancers
+)
 
 reactDom.render(
     <Provider store={store}>

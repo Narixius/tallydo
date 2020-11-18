@@ -5,14 +5,16 @@ import { Todo } from '../../store/todo'
 import { AddTodo } from '../../store/todo/actions'
 import Logo from '../logo'
 import Dates from './Dates'
-
+import Tags from './Tags'
+import { Tag } from '../../store/tag'
+import { clone } from 'lodash'
 const mapDispatchToProps = { AddTodo }
 
 type Props = {
     AddTodo: typeof AddTodo
 }
 let selectedDate = new Date()
-
+let tags: Tag[] = []
 function TodoAdder({ AddTodo }: Props) {
     const titleInput = React.createRef<HTMLInputElement>()
     const [value, setValue] = React.useState('')
@@ -24,9 +26,12 @@ function TodoAdder({ AddTodo }: Props) {
     // randomDate(new Date(2020, 11, 15), new Date())
 
     const addTodoHandler = (): void => {
-        AddTodo(new Todo(value, '', selectedDate))
-        setValue('')
-        titleInput.current!.value = ''
+        if (value.trim().length > 0) {
+            AddTodo(new Todo(value, '', selectedDate, tags))
+            tags = clone(tags)
+            setValue('')
+            titleInput.current!.value = ''
+        }
     }
 
     const onTodoTitleChanged = (
@@ -44,7 +49,14 @@ function TodoAdder({ AddTodo }: Props) {
     const onDateChange = (date: Date): void => {
         selectedDate = date
     }
-
+    const onTagAdd = (tag: Tag): void => {
+        if (tags.includes(tag) === false) tags.push(tag)
+    }
+    const onTagRemove = (tag: Tag): void => {
+        tags = tags.filter(
+            (t) => !(t.title === tag.title && t.color === tag.color)
+        )
+    }
     return (
         <div className="p-5 md:w-1/2 relative">
             <Logo />
@@ -63,18 +75,21 @@ function TodoAdder({ AddTodo }: Props) {
                     onChange={onTodoTitleChanged}
                     onKeyUp={onTodoTitleKeyUp}
                 />
-                <div className="flex flex-row-reverse w-full mt-4">
-                    <button
-                        onClick={addTodoHandler}
-                        className="add font-medium flex text-gray-800 px-3 py-1 rounded-md bg-white focus:outline-none"
-                    >
-                        Add
-                        <ArrowNarrowRight />
-                    </button>
-                </div>
             </div>
-            <div>
+            <div className="mt-5">
                 <Dates onDateChange={onDateChange} />
+            </div>
+            <div className="mt-5">
+                <Tags onTagAdd={onTagAdd} onTagRemove={onTagRemove} />
+            </div>
+            <div className="flex flex-row-reverse w-full mt-4">
+                <button
+                    onClick={addTodoHandler}
+                    className="add font-medium flex text-gray-800 px-3 py-1 rounded-md bg-white focus:outline-none"
+                >
+                    Add
+                    <ArrowNarrowRight />
+                </button>
             </div>
         </div>
     )

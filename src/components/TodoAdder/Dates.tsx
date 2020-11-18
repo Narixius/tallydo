@@ -13,7 +13,7 @@ function Dates({ onDateChange }: { onDateChange(date: Date): void }) {
 
     function generateClassName(fieldName: string) {
         let defaultClass =
-            'dateTag rounded-md text-sm text-white font-bold px-3 py-1 mr-3 opacity-25 cursor-pointer'
+            'dateTag rounded-md mb-2 text-sm text-white font-bold px-3 py-1 mr-3 opacity-25 cursor-pointer'
         if (fieldName === selectedDate) return defaultClass + ' active'
         else return defaultClass
     }
@@ -22,7 +22,7 @@ function Dates({ onDateChange }: { onDateChange(date: Date): void }) {
             <span className="text-white block p-2 pl-0 font-bold text-sm">
                 Due Date
             </span>
-            <div className="flex">
+            <div className="flex flex-wrap">
                 <div
                     className={generateClassName('today') + ' bg-red-500'}
                     onClick={() => {

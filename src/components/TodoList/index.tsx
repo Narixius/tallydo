@@ -1,4 +1,4 @@
-import { groupBy, isInteger } from 'lodash'
+import { groupBy } from 'lodash'
 import React from 'react'
 import { connect } from 'react-redux'
 import { RootState } from '../../store'

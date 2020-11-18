@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/tallydo/static/css/main.bda07440.chunk.css",
-    "main.js": "/tallydo/static/js/main.948196e6.chunk.js",
-    "main.js.map": "/tallydo/static/js/main.948196e6.chunk.js.map",
-    "runtime-main.js": "/tallydo/static/js/runtime-main.b593e111.js",
-    "runtime-main.js.map": "/tallydo/static/js/runtime-main.b593e111.js.map",
+    "main.css": "/tallydo/static/css/main.d441e926.chunk.css",
+    "main.js": "/tallydo/static/js/main.6eb55a97.chunk.js",
+    "main.js.map": "/tallydo/static/js/main.6eb55a97.chunk.js.map",
+    "runtime-main.js": "/tallydo/static/js/runtime-main.b86febe2.js",
+    "runtime-main.js.map": "/tallydo/static/js/runtime-main.b86febe2.js.map",
     "static/css/2.abb78336.chunk.css": "/tallydo/static/css/2.abb78336.chunk.css",
-    "static/js/2.cc76ff21.chunk.js": "/tallydo/static/js/2.cc76ff21.chunk.js",
-    "static/js/2.cc76ff21.chunk.js.map": "/tallydo/static/js/2.cc76ff21.chunk.js.map",
-    "static/js/3.df9e9044.chunk.js": "/tallydo/static/js/3.df9e9044.chunk.js",
-    "static/js/3.df9e9044.chunk.js.map": "/tallydo/static/js/3.df9e9044.chunk.js.map",
+    "static/js/2.0287f19b.chunk.js": "/tallydo/static/js/2.0287f19b.chunk.js",
+    "static/js/2.0287f19b.chunk.js.map": "/tallydo/static/js/2.0287f19b.chunk.js.map",
+    "static/js/3.3e557245.chunk.js": "/tallydo/static/js/3.3e557245.chunk.js",
+    "static/js/3.3e557245.chunk.js.map": "/tallydo/static/js/3.3e557245.chunk.js.map",
     "index.html": "/tallydo/index.html",
-    "precache-manifest.1c38f26e6c93f132bc24b60181ce7510.js": "/tallydo/precache-manifest.1c38f26e6c93f132bc24b60181ce7510.js",
+    "precache-manifest.6a1022f3d7abebea918bd10d00c94745.js": "/tallydo/precache-manifest.6a1022f3d7abebea918bd10d00c94745.js",
     "service-worker.js": "/tallydo/service-worker.js",
     "static/css/2.abb78336.chunk.css.map": "/tallydo/static/css/2.abb78336.chunk.css.map",
-    "static/css/main.bda07440.chunk.css.map": "/tallydo/static/css/main.bda07440.chunk.css.map",
-    "static/js/2.cc76ff21.chunk.js.LICENSE.txt": "/tallydo/static/js/2.cc76ff21.chunk.js.LICENSE.txt"
+    "static/css/main.d441e926.chunk.css.map": "/tallydo/static/css/main.d441e926.chunk.css.map",
+    "static/js/2.0287f19b.chunk.js.LICENSE.txt": "/tallydo/static/js/2.0287f19b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b593e111.js",
+    "static/js/runtime-main.b86febe2.js",
     "static/css/2.abb78336.chunk.css",
-    "static/js/2.cc76ff21.chunk.js",
-    "static/css/main.bda07440.chunk.css",
-    "static/js/main.948196e6.chunk.js"
+    "static/js/2.0287f19b.chunk.js",
+    "static/css/main.d441e926.chunk.css",
+    "static/js/main.6eb55a97.chunk.js"
   ]
 }

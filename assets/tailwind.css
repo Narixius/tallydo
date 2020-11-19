@@ -672,10 +672,6 @@ video {
   flex-direction: row-reverse;
 }
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
 .items-center {
   align-items: center;
 }
@@ -722,10 +718,6 @@ video {
 
 .text-2xl {
   font-size: 1.5rem;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
 }
 
 .m-auto {
@@ -804,6 +796,14 @@ video {
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
 }
 
 .p-1 {
@@ -1046,8 +1046,16 @@ video {
     display: none;
   }
 
+  .md\:flex-wrap {
+    flex-wrap: wrap;
+  }
+
   .md\:justify-between {
     justify-content: space-between;
+  }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
   }
 
   .md\:pt-10 {

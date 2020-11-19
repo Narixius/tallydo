@@ -58,7 +58,7 @@ function Tags({ onTagAdd, onTagRemove, tags, AddTag, RemoveTag }: Props) {
             <span className="text-white block p-2 pl-0 font-bold text-sm">
                 Tags
             </span>
-            <div className="flex flex-wrap">
+            <div className="flex md:flex-wrap overflow-x-auto overflow-y-hidden hiddenScrollbar">
                 {tags.map((tag, index) => {
                     return (
                         <div

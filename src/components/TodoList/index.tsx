@@ -1,12 +1,11 @@
 import { groupBy } from 'lodash'
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { connect } from 'react-redux'
 import { RootState } from '../../store'
 import { Todo, TodoArray } from '../../store/todo'
 import { UpdateTodo } from '../../store/todo/actions'
 import TodoGroup from './TodoGroup'
 import dayjs from 'dayjs'
-
 const mapStateToProps = ({ todos }: RootState) => {
     return { todos }
 }
@@ -15,22 +14,26 @@ const mapDispatchToProps = { UpdateTodo }
 
 type Props = {
     todos: TodoArray
+    forwardedRef: any
 }
 let isDragging = false
 let openStyle = { top: '50px' }
-let opened = false
+let opened = true
 let policy = 0
+
 let closeStyle = () => {
     return {
         top: window.innerHeight - 60 + 'px',
     }
 }
 
-function TodoList({ todos }: Props) {
+function TodoList({ todos, forwardedRef }: Props) {
+    console.log(forwardedRef)
     const groups = groupBy(todos, (todo: Todo) =>
         dayjs(todo.getDueDate()).format('DD-MM-YYYY')
     )
-    const [style, setStyle] = React.useState<any>(closeStyle)
+    const [style, setStyle] = React.useState<any>(openStyle)
+
     const dragStart = (e: any) => {
         isDragging = true
         policy = e.touches[0].screenY - parseInt(style.top)
@@ -51,32 +54,44 @@ function TodoList({ todos }: Props) {
                     parseInt(style.top) <
                     window.innerHeight / 2 + window.innerHeight / 4
                 ) {
-                    opened = true
-                    setStyle(openStyle)
+                    openTimeline()
                 } else {
-                    setStyle(closeStyle())
+                    closeTimeline()
                 }
             else if (parseInt(style.top) > window.innerHeight / 4) {
-                opened = false
-                setStyle(closeStyle())
+                closeTimeline()
             } else {
-                setStyle(openStyle)
+                openTimeline()
             }
             policy = 0
         }
     }
+    const openTimeline = (): void => {
+        opened = true
+        setStyle(openStyle)
+    }
+    const closeTimeline = (): void => {
+        opened = false
+        setStyle(closeStyle())
+    }
+    const mouseHandler = (): void => {
+        if (!opened) openTimeline()
+        else closeTimeline()
+    }
+    forwardedRef.current = mouseHandler
     return (
         <div
-            className="md:w-1/2 md:static timeline absolute transition-all duration-200 ease-out"
+            className="md:w-1/2 w-full md:static timeline absolute transition-all duration-200 ease-out"
             style={style}
         >
-            <div className=" h-full p-5">
+            <div className=" h-full p-5 ">
                 <div className=" rounded-2xl md:pt-10 h-full bg-white">
                     <div
                         className="line visible md:hidden mb-4 pt-4 pb-4"
                         onTouchStart={dragStart}
                         onTouchMove={onDragging}
                         onTouchEnd={onDragEnd}
+                        onMouseDown={mouseHandler}
                     >
                         <div className="w-20 rounded-md bg-gray-500 h-2 m-auto "></div>
                     </div>
@@ -98,4 +113,8 @@ function TodoList({ todos }: Props) {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+const Comp = connect(mapStateToProps, mapDispatchToProps)(TodoList)
+
+export default forwardRef((props, ref: any) => {
+    return <Comp {...props} forwardedRef={ref} />
+})

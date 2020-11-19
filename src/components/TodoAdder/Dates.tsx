@@ -22,7 +22,7 @@ function Dates({ onDateChange }: { onDateChange(date: Date): void }) {
             <span className="text-white block p-2 pl-0 font-bold text-sm">
                 Due Date
             </span>
-            <div className="flex flex-wrap">
+            <div className="flex md:flex-wrap overflow-x-auto overflow-y-hidden hiddenScrollbar">
                 <div
                     className={generateClassName('today') + ' bg-red-500'}
                     onClick={() => {

@@ -1,4 +1,4 @@
-import { ArrowNarrowRight } from 'heroicons-react'
+import { ArrowNarrowRight, ViewListOutline } from 'heroicons-react'
 import React from 'react'
 import { connect } from 'react-redux'
 import { Todo } from '../../store/todo'
@@ -12,18 +12,13 @@ const mapDispatchToProps = { AddTodo }
 
 type Props = {
     AddTodo: typeof AddTodo
+    onTimelineControllerClicked(): void
 }
 let selectedDate = new Date()
 let tags: Tag[] = []
-function TodoAdder({ AddTodo }: Props) {
+function TodoAdder({ AddTodo, onTimelineControllerClicked }: Props) {
     const titleInput = React.createRef<HTMLInputElement>()
     const [value, setValue] = React.useState('')
-    // function randomDate(start: Date, end: Date) {
-    //     return new Date(
-    //         start.getTime() + Math.random() * (end.getTime() - start.getTime())
-    //     )
-    // }
-    // randomDate(new Date(2020, 11, 15), new Date())
 
     const addTodoHandler = (): void => {
         if (value.trim().length > 0) {
@@ -59,8 +54,16 @@ function TodoAdder({ AddTodo }: Props) {
     }
     return (
         <div className="p-5 md:w-1/2 relative">
-            <Logo />
-            <h2 className="text-3xl font-bold text-white lg:mt-10 mt-5">
+            <div className="flex justify-between">
+                <Logo />
+                <div
+                    className="md:hidden visible bg-gray-400 bg-opacity-25 p-2 rounded-md cursor-pointer"
+                    onClick={onTimelineControllerClicked}
+                >
+                    <ViewListOutline className="text-gray-300 " />
+                </div>
+            </div>
+            <h2 className="md:text-3xl text-2xl font-bold text-white lg:mt-10 mt-5">
                 What’s you plan to do?
             </h2>
             <p className="text-gray-500 font-medium text-sm lg:mt-2 mt-1">
@@ -85,10 +88,10 @@ function TodoAdder({ AddTodo }: Props) {
             <div className="flex flex-row-reverse w-full mt-4">
                 <button
                     onClick={addTodoHandler}
-                    className="add font-medium flex text-gray-800 px-3 py-1 rounded-md bg-white focus:outline-none"
+                    className="add font-bold flex text-gray-800 px-3 py-1 rounded-md bg-white focus:outline-none"
                 >
                     Add
-                    <ArrowNarrowRight />
+                    <ArrowNarrowRight className="ml-1" />
                 </button>
             </div>
         </div>

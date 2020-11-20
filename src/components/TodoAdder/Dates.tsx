@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
 import './Dates.css'
-import { SingleDatePicker } from 'react-dates'
+import { DayPicker } from 'react-dates'
 import isToday from 'dayjs/plugin/isToday'
 dayjs.extend(isToday)
 
@@ -23,12 +23,6 @@ function Dates({ onDateChange }: { onDateChange(date: Date): void }) {
         setSelectedDate(state)
         setCustomDate(undefined)
         onDateChange(date)
-    }
-    const customDateSelected = (e: moment.Moment | any) => {
-        setSelectedDate('customDate')
-        setCustomDate(e.toDate())
-        onDateChange(e.toDate())
-        setShowCalendar(false)
     }
     const selectingCustomDate = () => {
         setSelectedDate('customDate')
@@ -79,17 +73,23 @@ function Dates({ onDateChange }: { onDateChange(date: Date): void }) {
             {showCalendar && (
                 <div className="relative mt-1 calendar">
                     <div className="calendar -mt-32 absolute z-50 w-full flex justify-center items-center">
-                        <SingleDatePicker
-                            id="signleDatePicker"
+                        <DayPicker
                             numberOfMonths={1}
-                            focused={true}
-                            date={null}
-                            onDateChange={customDateSelected}
-                            isDayHighlighted={(day1) =>
-                                dayjs(day1.toDate()).isToday()
+                            onDayClick={(e) => {
+                                setSelectedDate('customDate')
+                                setCustomDate(e.toDate())
+                                onDateChange(e.toDate())
+                                setShowCalendar(false)
+                            }}
+                            renderDayContents={(day) =>
+                                dayjs(day.toDate()).isToday() ? (
+                                    <span className="isToday">
+                                        {day.format('D')}
+                                    </span>
+                                ) : (
+                                    day.format('D')
+                                )
                             }
-                            onFocusChange={() => {}}
-                            withPortal
                         />
                     </div>
                 </div>

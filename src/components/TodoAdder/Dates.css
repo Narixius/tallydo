@@ -9,3 +9,6 @@
 .customDate {
     width: 100%;
 }
+.isToday{
+	color: #F56565;
+}

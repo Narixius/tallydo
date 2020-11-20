@@ -28,7 +28,6 @@ let closeStyle = () => {
 }
 
 function TodoList({ todos, forwardedRef }: Props) {
-    console.log(forwardedRef)
     const groups = groupBy(todos, (todo: Todo) =>
         dayjs(todo.getDueDate()).format('DD-MM-YYYY')
     )
@@ -39,7 +38,6 @@ function TodoList({ todos, forwardedRef }: Props) {
         policy = e.touches[0].screenY - parseInt(style.top)
     }
     const onDragging = (e: any): void => {
-        console.log(e)
         if (isDragging)
             setStyle({
                 top: e.touches[0].screenY - policy + 'px',

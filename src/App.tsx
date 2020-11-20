@@ -5,9 +5,6 @@ import TodoList from './components/TodoList'
 
 function App() {
     const todoListRef = React.useRef<any>()
-    setTimeout(() => {
-        console.log(todoListRef)
-    })
     const onTimelineControllerClicked = () => {
         todoListRef.current()
     }

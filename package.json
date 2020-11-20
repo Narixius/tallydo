@@ -14,6 +14,7 @@
     "react-flip-move": "^3.0.4",
     "react-redux": "^7.2.2",
     "react-scripts": "3.4.4",
+    "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "tailwindcss": "^1.9.6",
     "web-vitals": "^0.2.4"
@@ -30,6 +31,7 @@
     "@types/react-dates": "^21.8.0",
     "@types/react-dom": "^16.9.9",
     "@types/react-redux": "^7.1.11",
+    "@types/react-transition-group": "^4.4.0",
     "@types/redux": "^3.6.0",
     "autoprefixer": "^10.0.2",
     "create-react-app": "^4.0.0",

@@ -30,4 +30,17 @@ export function UpdateTodo(todo: Todo): IUpdateTodo {
   };
 }
 
-export type TodoActions = IAddTodo | IUpdateTodo;
+export const REMOVE = 'REMOVE_TODO';
+interface IRemoveTodo extends IAction {
+  type: typeof REMOVE;
+  payload: Todo;
+}
+
+export function RemoveTodo(todo: Todo): IRemoveTodo {
+  return {
+    type: REMOVE,
+    payload: todo,
+  };
+}
+
+export type TodoActions = IAddTodo | IUpdateTodo | IRemoveTodo;

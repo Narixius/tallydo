@@ -1,4 +1,4 @@
-import { ADD,TodoActions, UPDATE } from './actions';
+import { ADD,TodoActions, UPDATE, REMOVE } from './actions';
 import {Tag} from "../tag"
 export class Todo {
 	private static baseId:number = 0;
@@ -43,6 +43,13 @@ export function todoReducer(
 				item = action.payload
 			}
 			return item;
+		})
+		case REMOVE:
+		return state.filter((item) =>{
+			if(item.getId()!== action.payload.getId()){
+				return item;
+			}
+			return false;
 		})
     default:
       return state;

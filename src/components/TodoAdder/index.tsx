@@ -7,7 +7,7 @@ import Logo from '../logo'
 import Dates from './Dates'
 import Tags from './Tags'
 import { Tag } from '../../store/tag'
-import { clone } from 'lodash'
+import { clone, sample } from 'lodash'
 const mapDispatchToProps = { AddTodo }
 
 type Props = {
@@ -16,16 +16,23 @@ type Props = {
 }
 let selectedDate = new Date()
 let tags: Tag[] = []
+let placeholders = [
+    'Shoping..?',
+    'Watching a movie..?',
+    'Hanging out...?',
+    'Speak with somebody...?',
+]
 function TodoAdder({ AddTodo, onTimelineControllerClicked }: Props) {
     const titleInput = React.createRef<HTMLInputElement>()
     const [value, setValue] = React.useState('')
-
+    const [placeholder, setPlaceholder] = React.useState(sample(placeholders))
     const addTodoHandler = (): void => {
         if (value.trim().length > 0) {
             AddTodo(new Todo(value, '', selectedDate, tags))
             tags = clone(tags)
             setValue('')
             titleInput.current!.value = ''
+            setPlaceholder(sample(placeholders))
         }
     }
 
@@ -74,7 +81,7 @@ function TodoAdder({ AddTodo, onTimelineControllerClicked }: Props) {
                     ref={titleInput}
                     type="text"
                     className="px-4 py-3 rounded-md font bg-white bg-opacity-25 text-gray-100 w-full focus:outline-none placeholder-gray-400"
-                    placeholder="Shopping...?!"
+                    placeholder={placeholder}
                     onChange={onTodoTitleChanged}
                     onKeyUp={onTodoTitleKeyUp}
                 />

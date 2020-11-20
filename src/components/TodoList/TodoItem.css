@@ -9,6 +9,24 @@
     box-shadow: -1px 0 1px 1px rgba(243, 243, 243, 0.6),
         inset -1px 0 0 1px rgba(243, 243, 243, 0.6);
 }
+.item-enter {
+    opacity: 0;
+    height: 0px;
+}
+.item-enter-active {
+    opacity: 1;
+    height: auto;
+    transition: all 0.1s ease-in;
+}
+.item-exit {
+    opacity: 1;
+    height: auto;
+}
+.item-exit-active {
+    opacity: 0;
+    height: 0px;
+    transition: all 0.1s ease-in;
+}
 
 @media (max-width: 768px) {
     .timeline {

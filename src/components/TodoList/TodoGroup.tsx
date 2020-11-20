@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, memo } from 'react'
 import { connect } from 'react-redux'
 import { UpdateTodo } from '../../store/todo/actions'
 import { Todo } from '../../store/todo/index'
@@ -7,7 +7,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 import isToday from 'dayjs/plugin/isToday'
 import isTomorrow from 'dayjs/plugin/isTomorrow'
 import dayjs from 'dayjs'
-import { sortBy, zipObject } from 'lodash'
+import { isEqual, sortBy, zipObject } from 'lodash'
 import FlipMove from 'react-flip-move'
 
 dayjs.extend(customParseFormat)
@@ -27,6 +27,8 @@ type Props = {
 }
 
 function TodoGroup({ groups, UpdateTodo }: Props) {
+    const [showMenu, setShowMenu] = React.useState(-1)
+
     // sort object keys by date
     var keys = sortBy(Object.keys(groups), (key) => {
         return dayjs(key, 'DD-MM-YYYY').toDate()
@@ -65,12 +67,17 @@ function TodoGroup({ groups, UpdateTodo }: Props) {
     type ppp = {
         todo: Todo
         onTodoCheck(t: Todo): void
+        showMenu: boolean
+        setShowMenu(t: number): void
     }
-    const FunctionalTodoItem = forwardRef((props: ppp, ref: any) => (
-        <div ref={ref}>
-            <TodoItem onTodoCheck={props.onTodoCheck} todo={props.todo} />
-        </div>
-    ))
+    const FunctionalTodoItem = memo(
+        forwardRef((props: ppp, ref: any) => (
+            <div ref={ref}>
+                <TodoItem {...props} />
+            </div>
+        )),
+        (prevProps: any, nextProps: any) => !isEqual(prevProps, nextProps)
+    )
 
     const groupTodos = (todos: Todo[]) => {
         return todos.map((item) => {
@@ -79,6 +86,8 @@ function TodoGroup({ groups, UpdateTodo }: Props) {
                     onTodoCheck={todoCheckedHandler}
                     todo={item}
                     key={item.getId()}
+                    showMenu={showMenu === item.getId()}
+                    setShowMenu={setShowMenu}
                 />
             )
         })

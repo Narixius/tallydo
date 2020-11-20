@@ -1,15 +1,30 @@
-import { Check } from 'heroicons-react'
-import React from 'react'
+import { Check, DotsVerticalOutline, TrashOutline } from 'heroicons-react'
+import React, { memo } from 'react'
 import { Todo } from '../../store/todo/index'
 import './TodoItem.css'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { isEqual } from 'lodash'
+import { RemoveTodo } from '../../store/todo/actions'
+import { connect } from 'react-redux'
+// TODO use memo here to watch showMenu variable
+
+const mapDispatchToProps = { RemoveTodo }
 
 function TodoItem({
     todo,
     onTodoCheck,
+    showMenu,
+    setShowMenu,
+    RemoveTodo,
 }: {
     todo: Todo
     onTodoCheck(t: Todo): void
+    showMenu: boolean
+    setShowMenu(t: number): void
+    RemoveTodo(t: Todo): void
 }) {
+    // const [showMenu, setShowMenu] = React.useState(-1)
+
     let className =
         'todo-item mb-2 text-black-blue p-2 rounded-md flex justify-between select-none  cursor-pointer bg-active-todo'
 
@@ -37,9 +52,9 @@ function TodoItem({
                     maxWidth:
                         todo.getTags().length > 0
                             ? todo.getTitle().length > 20
-                                ? '75%'
-                                : '55%'
-                            : '100%',
+                                ? '70%'
+                                : '50%'
+                            : '95%',
                 }}
             >
                 <div className={todoCheckBoxClassName}>
@@ -50,9 +65,9 @@ function TodoItem({
                 </span>
             </div>
             <div
-                className="hiddenScrollbar"
+                className="hiddenScrollbar flex justify-between items-center"
                 style={{
-                    maxWidth: todo.getTitle().length > 20 ? '25%' : '45%',
+                    maxWidth: todo.getTitle().length > 20 ? '20%' : '55%',
                     overflowX: 'scroll',
                 }}
             >
@@ -67,9 +82,55 @@ function TodoItem({
                         </span>
                     )
                 })}
+                <div className="dropdown">
+                    <div
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            setShowMenu(todo.getId())
+                        }}
+                        className="btn flex justify-center items-center w-6 h-6 hover:bg-gray-200 rounded-md text-gray-700"
+                    >
+                        <DotsVerticalOutline
+                            className="text-current"
+                            size={18}
+                        />
+                    </div>
+                    <TransitionGroup className="todo-list">
+                        {showMenu && (
+                            <CSSTransition
+                                key="1"
+                                timeout={100}
+                                classNames="item"
+                            >
+                                <ul className="absolute z-60 right-0 py-1 bg-white shadow-md rounded-md">
+                                    <li
+                                        className="flex justify-center items-center hover:bg-gray-200 rounded-sm py-1 px-2"
+                                        onClick={(e) => {
+                                            e.stopPropagation()
+                                            RemoveTodo(todo)
+                                        }}
+                                    >
+                                        <TrashOutline size={18} />{' '}
+                                        <span className="font-bold text-sm ml-1">
+                                            Delete
+                                        </span>
+                                    </li>
+                                </ul>
+                            </CSSTransition>
+                        )}
+                    </TransitionGroup>
+                </div>
             </div>
         </div>
     )
 }
 
-export default TodoItem
+export default connect(
+    null,
+    mapDispatchToProps
+)(
+    memo(
+        TodoItem,
+        (prevProps: any, nextProps: any) => !isEqual(prevProps, nextProps)
+    )
+)

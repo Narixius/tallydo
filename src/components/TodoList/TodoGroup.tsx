@@ -64,14 +64,14 @@ function TodoGroup({ groups, UpdateTodo }: Props) {
 
         UpdateTodo(item)
     }
-    type ppp = {
+    type forwardProps = {
         todo: Todo
         onTodoCheck(t: Todo): void
         showMenu: boolean
         setShowMenu(t: number): void
     }
     const FunctionalTodoItem = memo(
-        forwardRef((props: ppp, ref: any) => (
+        forwardRef((props: forwardProps, ref: any) => (
             <div ref={ref}>
                 <TodoItem {...props} />
             </div>

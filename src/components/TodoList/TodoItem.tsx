@@ -6,6 +6,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { isEqual } from 'lodash'
 import { RemoveTodo } from '../../store/todo/actions'
 import { connect } from 'react-redux'
+import { Tag } from '../../store/tag'
 // TODO use memo here to watch showMenu variable
 
 const mapDispatchToProps = { RemoveTodo }
@@ -38,7 +39,66 @@ function TodoItem({
     } else {
         todoCheckBoxClassName += '  border-black-blue'
     }
+    const uListRef = React.useRef<HTMLUListElement>() as React.MutableRefObject<
+        HTMLUListElement
+    >
 
+    // handling outside click
+    React.useEffect(() => {
+        const handleClick = (e: any) => {
+            if (uListRef.current)
+                if (!uListRef.current.contains(e.target)) setShowMenu(-1)
+        }
+        document.addEventListener('mousedown', handleClick)
+        return () => {
+            document.removeEventListener('mousedown', handleClick)
+        }
+    }, [setShowMenu, uListRef])
+    const todoContentStyle = {
+        maxWidth:
+            todo.getTags().length > 0
+                ? todo.getTitle().length > 20
+                    ? '70%'
+                    : '50%'
+                : '95%',
+    }
+    const todoTagsStyle = {
+        maxWidth: todo.getTitle().length > 20 ? '20%' : '55%',
+    }
+    const tagElement = (tag: Tag) => (
+        <span
+            key={tag.getId()}
+            className="ml-1 px-2 py-1 rounded-md font-bold text-sm"
+            style={{ backgroundColor: tag.color }}
+        >
+            {tag.title}
+        </span>
+    )
+    const dropDownMenu = (
+        <TransitionGroup className="todo-list">
+            {showMenu && (
+                <CSSTransition key="1" timeout={100} classNames="item">
+                    <ul
+                        ref={uListRef}
+                        className="absolute z-60 right-0 py-1 bg-white shadow-md rounded-md"
+                    >
+                        <li
+                            className="flex justify-center items-center hover:bg-gray-200 rounded-sm py-1 px-2"
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                RemoveTodo(todo)
+                            }}
+                        >
+                            <TrashOutline size={18} />{' '}
+                            <span className="font-bold text-sm ml-1">
+                                Delete
+                            </span>
+                        </li>
+                    </ul>
+                </CSSTransition>
+            )}
+        </TransitionGroup>
+    )
     return (
         <div
             onClick={() => {
@@ -46,17 +106,7 @@ function TodoItem({
             }}
             className={className}
         >
-            <div
-                className="flex items-center "
-                style={{
-                    maxWidth:
-                        todo.getTags().length > 0
-                            ? todo.getTitle().length > 20
-                                ? '70%'
-                                : '50%'
-                            : '95%',
-                }}
-            >
+            <div className="flex items-center " style={todoContentStyle}>
                 <div className={todoCheckBoxClassName}>
                     {todo.isChecked() && <Check size={14} />}
                 </div>
@@ -65,23 +115,10 @@ function TodoItem({
                 </span>
             </div>
             <div
-                className="hiddenScrollbar flex justify-between items-center"
-                style={{
-                    maxWidth: todo.getTitle().length > 20 ? '20%' : '55%',
-                    overflowX: 'scroll',
-                }}
+                className="hiddenScrollbar flex justify-between items-center overflow-x-scroll"
+                style={todoTagsStyle}
             >
-                {todo.getTags().map((tag) => {
-                    return (
-                        <span
-                            key={tag.getId()}
-                            className="ml-1 px-2 py-1 rounded-md font-bold text-sm"
-                            style={{ backgroundColor: tag.color }}
-                        >
-                            {tag.title}
-                        </span>
-                    )
-                })}
+                {todo.getTags().map((tag) => tagElement(tag))}
                 <div className="dropdown">
                     <div
                         onClick={(e) => {
@@ -95,30 +132,7 @@ function TodoItem({
                             size={18}
                         />
                     </div>
-                    <TransitionGroup className="todo-list">
-                        {showMenu && (
-                            <CSSTransition
-                                key="1"
-                                timeout={100}
-                                classNames="item"
-                            >
-                                <ul className="absolute z-60 right-0 py-1 bg-white shadow-md rounded-md">
-                                    <li
-                                        className="flex justify-center items-center hover:bg-gray-200 rounded-sm py-1 px-2"
-                                        onClick={(e) => {
-                                            e.stopPropagation()
-                                            RemoveTodo(todo)
-                                        }}
-                                    >
-                                        <TrashOutline size={18} />{' '}
-                                        <span className="font-bold text-sm ml-1">
-                                            Delete
-                                        </span>
-                                    </li>
-                                </ul>
-                            </CSSTransition>
-                        )}
-                    </TransitionGroup>
+                    {dropDownMenu}
                 </div>
             </div>
         </div>

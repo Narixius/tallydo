@@ -85,7 +85,7 @@ function TodoList({ todos, forwardedRef }: Props) {
             <div className=" h-full p-5 ">
                 <div className=" rounded-2xl md:pt-10 h-full bg-white">
                     <div
-                        className="line visible md:hidden mb-4 pt-4 pb-4"
+                        className="line visible md:hidden mb-2 pt-4 pb-2"
                         onTouchStart={dragStart}
                         onTouchMove={onDragging}
                         onTouchEnd={onDragEnd}
@@ -94,7 +94,7 @@ function TodoList({ todos, forwardedRef }: Props) {
                         <div className="w-20 rounded-md bg-gray-500 h-2 m-auto "></div>
                     </div>
                     <div className="p-1 pr-10 pl-10 pb-10">
-                        <h2 className="text-black-blue font-bold text-2xl">
+                        <h2 className="text-black-blue font-bold text-xl md:text-2xl">
                             Timeline
                         </h2>
                         <p className="mt-2 text-gray-500 text-sm">

@@ -9,5 +9,5 @@ performance optimization : done
 scroll bar : done
 save todos in localstorage
 show empty alert if there is no todo
-max width for container
+max width for container: done
 delete on done elements goes under other

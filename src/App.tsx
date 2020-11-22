@@ -9,7 +9,7 @@ function App() {
         todoListRef.current()
     }
     return (
-        <div className="App md:flex bg-black-blue h-full md:justify-between">
+        <div className="App max-w-6xl m-auto md:flex h-full md:justify-between">
             <TodoAdder
                 onTimelineControllerClicked={onTimelineControllerClicked}
             />

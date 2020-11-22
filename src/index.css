@@ -34,3 +34,6 @@ body,
     border-radius: 20px; /* roundness of the scroll thumb */
     margin-right: 10px;
 }
+body {
+    background-color: #21253f;
+}

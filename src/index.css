@@ -22,3 +22,15 @@ body,
     scrollbar-width: none; /* Firefox */
     display: none;
 }
+.styledScroll::-webkit-scrollbar {
+    width: 8px; /* width of the entire scrollbar */
+}
+.styledScroll::-webkit-scrollbar-track {
+    background: transparent; /* color of the tracking area */
+    margin: 10px;
+}
+.styledScroll::-webkit-scrollbar-thumb {
+    background-color: #21253f; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    margin-right: 10px;
+}

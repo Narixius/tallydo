@@ -43,7 +43,9 @@ if (defaultTodo && defaultTodo.length > 0) {
 			const tags:Tag[] = item.tags.map((tag:any) =>{
 				return new Tag(tag.title, tag.color, tag.defaultTodo)
 			})
-            todos.push(new Todo(item.title, item.description, dayjs(item.dueDate).toDate(), tags));
+			let todo = new Todo(item.title, item.description, dayjs(item.dueDate).toDate(), tags);
+			todo.setChecked(item.isCompleted)
+            todos.push(todo);
         })
     }
 }
@@ -55,9 +57,10 @@ export function todoReducer(
   state: TodoArray = [],
   action: TodoActions
 ): TodoArray {
+	let todos = [];
   switch (action.type) {
     case ADD:
-		let todos = [...state, action.payload];
+		todos = [...state, action.payload];
 		window.localStorage.setItem('todos', JSON.stringify(todos))
 		return todos;
 	case UPDATE:

@@ -66,7 +66,7 @@ function TodoItem({
     const tagElement = (tag: Tag) => (
         <span
             key={tag.getId()}
-            className="ml-1 px-2 py-1 rounded-md font-bold text-sm"
+            className="tag ml-1 px-2 py-1 rounded-md font-bold text-sm"
             style={{ backgroundColor: tag.color }}
         >
             {tag.title}

@@ -8,6 +8,7 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 
 import { defaultTags } from './store/tag/index'
+import { defaultTodos } from './store/todo/index'
 
 const composeEnhancers =
     ((window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
@@ -17,7 +18,7 @@ const composeEnhancers =
 const store = createStore(
     rootState,
     {
-        todos: [],
+        todos: defaultTodos,
         tags: defaultTags,
     },
     composeEnhancers

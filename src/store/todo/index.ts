@@ -1,5 +1,7 @@
 import { ADD,TodoActions, UPDATE, REMOVE } from './actions';
 import {Tag} from "../tag"
+import { isArray } from 'lodash';
+import dayjs from 'dayjs';
 export class Todo {
 	private static baseId:number = 0;
 	private readonly id:number;
@@ -30,27 +32,52 @@ export class Todo {
 
 export type TodoArray = Todo[];
 
+
+
+let defaultTodo = localStorage.getItem('todos')
+let todos: Todo[] = []
+if (defaultTodo && defaultTodo.length > 0) {
+    defaultTodo = JSON.parse(defaultTodo)
+    if (isArray(defaultTodo)) {
+        defaultTodo.forEach((item) => {
+			const tags:Tag[] = item.tags.map((tag:any) =>{
+				return new Tag(tag.title, tag.color, tag.defaultTodo)
+			})
+            todos.push(new Todo(item.title, item.description, dayjs(item.dueDate).toDate(), tags));
+        })
+    }
+}
+export const defaultTodos = todos;
+
+
+
 export function todoReducer(
   state: TodoArray = [],
   action: TodoActions
 ): TodoArray {
   switch (action.type) {
     case ADD:
-	  return [...state, action.payload];
+		let todos = [...state, action.payload];
+		window.localStorage.setItem('todos', JSON.stringify(todos))
+		return todos;
 	case UPDATE:
-		return state.filter((item) =>{
+		todos =  state.filter((item) =>{
 			if(item.getId() === action.payload.getId()){
 				item = action.payload
 			}
 			return item;
 		})
+		window.localStorage.setItem('todos', JSON.stringify(todos))
+		return todos;
 		case REMOVE:
-		return state.filter((item) =>{
+		todos = state.filter((item) =>{
 			if(item.getId()!== action.payload.getId()){
 				return item;
 			}
 			return false;
 		})
+		window.localStorage.setItem('todos', JSON.stringify(todos))
+		return todos;
     default:
       return state;
   }

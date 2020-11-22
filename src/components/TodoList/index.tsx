@@ -31,8 +31,8 @@ function TodoList({ todos, forwardedRef }: Props) {
     const groups = groupBy(todos, (todo: Todo) =>
         dayjs(todo.getDueDate()).format('DD-MM-YYYY')
     )
-    const [style, setStyle] = React.useState<any>(openStyle)
 
+    const [style, setStyle] = React.useState<any>(openStyle)
     const dragStart = (e: any) => {
         isDragging = true
         policy = e.touches[0].screenY - parseInt(style.top)
@@ -77,6 +77,11 @@ function TodoList({ todos, forwardedRef }: Props) {
         else closeTimeline()
     }
     forwardedRef.current = mouseHandler
+    const emptyTodoDialog = (
+        <span className="block text-center pt-5">
+            It seems you didn't add any todo yet...!
+        </span>
+    )
     return (
         <div
             className="md:w-1/2 w-full md:static timeline absolute transition-all duration-200 ease-out"
@@ -104,7 +109,11 @@ function TodoList({ todos, forwardedRef }: Props) {
                                 <span className="text-xs">- Henry James</span>
                             </p>
                             <div className="list mt-5">
-                                <TodoGroup groups={groups} />
+                                {Object.keys(groups).length > 0 ? (
+                                    <TodoGroup groups={groups} />
+                                ) : (
+                                    emptyTodoDialog
+                                )}
                             </div>
                         </div>
                     </div>

@@ -33,15 +33,13 @@ function TodoItem({
 
     let todoTitleClassName = 'ml-2 font-medium'
     if (todo.isChecked()) {
-        className += ' bg-opacity-25 done-todo opacity-75'
+        className += ' bg-opacity-25 done-todo '
         todoCheckBoxClassName += ' border-green-400 text-green-400'
         todoTitleClassName += ' text-green-400 line-through'
     } else {
         todoCheckBoxClassName += '  border-black-blue'
     }
-    const uListRef = React.useRef<HTMLUListElement>() as React.MutableRefObject<
-        HTMLUListElement
-    >
+    const uListRef = React.useRef<HTMLUListElement>() as React.MutableRefObject<HTMLUListElement>
 
     // handling outside click
     React.useEffect(() => {
@@ -80,7 +78,7 @@ function TodoItem({
                 <CSSTransition key="1" timeout={100} classNames="item">
                     <ul
                         ref={uListRef}
-                        className="absolute z-60 right-0 py-1 bg-white shadow-md rounded-md"
+                        className="absolute z-40 right-0 py-1 bg-white shadow-md rounded-md"
                     >
                         <li
                             className="flex justify-center items-center hover:bg-gray-200 rounded-sm py-1 px-2"

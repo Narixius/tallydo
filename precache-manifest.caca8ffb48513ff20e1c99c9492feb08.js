@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "be764a288e0e21b0b0b3b5a1030ab67a",
+    "revision": "07d05ca2dd73428350138ccb442a21b0",
     "url": "/tallydo/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tallydo/static/css/2.abb78336.chunk.css"
   },
   {
-    "revision": "86a2e3bbe29b7b8921cb",
-    "url": "/tallydo/static/css/main.5cd973da.chunk.css"
+    "revision": "a3272d667845c19d6660",
+    "url": "/tallydo/static/css/main.5fe7aede.chunk.css"
   },
   {
     "revision": "28a1dd78c560f459359c",
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tallydo/static/js/3.526b016d.chunk.js"
   },
   {
-    "revision": "86a2e3bbe29b7b8921cb",
+    "revision": "a3272d667845c19d6660",
     "url": "/tallydo/static/js/main.e0ccfca2.chunk.js"
   },
   {

@@ -1,6 +1,7 @@
 const webdriver = require('selenium-webdriver')
 const assert = require('assert')
 const gridHost = 'hub.lambdatest.com/wd/hub'
+require('dotenv').config()
 
 async function executeTest() {
     // Setup Input capabilities
@@ -10,13 +11,13 @@ async function executeTest() {
         version: '75.0',
         tunnel: true,
         video: true,
-        tunnelName: process.env.tunnelName,
+        tunnelName: process.env.LT_TUNNEL_NAME,
         name: 'Test 1', // name of the test
         build: 'NodeJS build', // name of the build
     }
 
     // URL: https://{username}:{accessKey}@hub.lambdatest.com/wd/hub
-    const gridUrl = `https://${process.env.username}:${process.env.accessKey}@${gridHost}`
+    const gridUrl = `https://${process.env.LT_USERNAME}:${process.env.LT_ACCESS_KEY}@${gridHost}`
     console.log(gridUrl)
     const driver = new webdriver.Builder()
         .usingServer(gridUrl)

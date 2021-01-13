@@ -27,9 +27,9 @@ jobs:
 
       - name: Run Test Case
         env:
-          username: ${{ secrets.LT_USERNAME }}
-          accessKey: ${{ secrets.LT_ACCESS_KEY }}
-          tunnelName: testTunnel
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          LT_TUNNEL_NAME: testTunnel
 
         run: npm test
 

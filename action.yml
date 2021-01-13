@@ -47,10 +47,6 @@ outputs:
   logFileName:
     description: "Name of log file of tunnel"
 
-runs:
-  using: "node12"
-  main: "build/index.js"
-  post: "build/index.js"
 
 branding:
   icon: 'wifi'

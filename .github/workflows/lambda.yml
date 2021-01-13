@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 12
       - run: npm install
-      - run: npm run build
+      - run: npm run build --if-present
 
       - name: Start LambdaTest Tunnel
         id: tunnel
@@ -30,7 +30,6 @@ jobs:
           username: ${{ secrets.LT_USERNAME }}
           accessKey: ${{ secrets.LT_ACCESS_KEY }}
           tunnelName: "test tunnel"
-
         run: npm test
 
       - name: Export Tunnel Logs for debugging

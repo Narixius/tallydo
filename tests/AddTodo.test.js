@@ -2,7 +2,7 @@ const webdriver = require('selenium-webdriver')
 const assert = require('assert')
 const gridHost = 'hub.lambdatest.com/wd/hub'
 require('dotenv').config()
-
+const {By} = webdriver;
 async function executeTest() {
     // Setup Input capabilities
     const capabilities = {
@@ -26,8 +26,19 @@ async function executeTest() {
 
     try {
         await driver.get('http://localhost:8888/')
-        const body = await driver.findElement(webdriver.By.tagName('body'))
-        assert.strictEqual(await body.getText(), 'LambdaTest Tunnel')
+
+
+
+        await driver.findElement(webdriver.By.css('.px-4')).click()
+        await driver.findElement(webdriver.By.css('.px-4')).sendKeys('Coffee time')
+        await driver.findElement(webdriver.By.css('.bg-indigo-500 > span')).click()
+        await driver.findElement(webdriver.By.css('.tag:nth-child(2) > span')).click()
+        await driver.findElement(webdriver.By.css('.add')).click()
+
+        const addedItem = await driver.findElement( By.css('span.ml-2.font-medium.w-full.truncate'))
+
+        assert.strictEqual(await addedItem.getText(), 'Coffee time')
+
     } finally {
         await driver.quit()
     }

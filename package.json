@@ -2,7 +2,6 @@
   "name": "tallydo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://narixius.github.io/tallydo",
   "dependencies": {
     "dayjs": "^1.9.6",
     "dotenv": "^8.2.0",
@@ -59,7 +58,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "run-p test:*",
-    "test:server": "http-server -p 8888 ./build > /dev/null 2>&1 &",
+    "test:server": "http-server -p 8888 ./build",
     "test:run": "node ./tests/AddTodo.test.js"
   },
   "eslintConfig": {

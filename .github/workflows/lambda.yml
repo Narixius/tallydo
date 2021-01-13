@@ -12,17 +12,15 @@ jobs:
               with:
                 node-version: 12
             - run: npm install
+            - run: npm run build
 
-            - name: Start Tunnel
-              uses: LambdaTest/LambdaTest-tunnel-action@v1
+            - name: Start LambdaTest Tunnel
               id: tunnel
+              uses: ./ # Uses an action in the root directory
               with:
                 user: ${{ secrets.LT_EMAIL }}
                 accessKey: ${{ secrets.LT_ACCESS_KEY }}
-                tunnelName: "testTunnel"
-
-            - name: Build project
-            - run: npm test
+                tunnelName: "test tunnel"
 
             - name: Run Test Case
               env:
@@ -30,11 +28,10 @@ jobs:
                 accessKey: ${{ secrets.LT_ACCESS_KEY }}
                 tunnelName: "test tunnel"
 
-            - run: npm run build
+              run: npm test
 
             - name: Export Tunnel Logs for debugging
-              uses: actions/upload-artifact@v2
-
+            - uses: actions/upload-artifact@v2
               with:
                 name: tunnel_logs
                 path: ${{ steps.tunnel.outputs.logFileName }}

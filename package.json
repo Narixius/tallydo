@@ -42,6 +42,7 @@
     "postcss": "^8.1.7",
     "postcss-cli": ">=8.0",
     "selenium-webdriver": "^4.0.0-alpha.8",
+    "start-server-and-test": "^1.11.7",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "tslint-consistent-codestyle": "^1.16.0",
@@ -58,9 +59,10 @@
     "tailwind:watch": "postcss src/tailwind.css -o public/assets/tailwind.css --watch",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "test": "run-p test:*",
+    "test-p": "run-p test:*",
     "test:server": "http-server -p 8888 ./build",
-    "test:run": "node ./tests/AddTodo.test.js"
+    "test:run": "node ./tests/AddTodo.test.js",
+    "test": "start-server-and-test test:server 8888 test:run"
   },
   "eslintConfig": {
     "extends": [

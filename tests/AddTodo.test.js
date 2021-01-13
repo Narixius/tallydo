@@ -28,7 +28,6 @@ async function executeTest() {
         await driver.get('http://localhost:8888/')
 
 
-
         await driver.findElement(webdriver.By.css('.px-4')).click()
         await driver.findElement(webdriver.By.css('.px-4')).sendKeys('Coffee time')
         await driver.findElement(webdriver.By.css('.bg-indigo-500 > span')).click()
@@ -36,6 +35,9 @@ async function executeTest() {
         await driver.findElement(webdriver.By.css('.add')).click()
 
         const addedItem = await driver.findElement( By.css('span.ml-2.font-medium.w-full.truncate'))
+
+        await driver.sleep(1000);
+
 
         assert.strictEqual(await addedItem.getText(), 'Coffee time')
 

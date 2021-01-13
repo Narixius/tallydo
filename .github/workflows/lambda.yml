@@ -27,8 +27,8 @@ jobs:
                 accessKey: ${{ secrets.LT_ACCESS_KEY }}
                 tunnelName: "test tunnel"
 
-              run: npm run build
-              run: npm test
+            - run: npm run build
+            - run: npm test
 
             - name: Export Tunnel Logs for debugging
               uses: actions/upload-artifact@v2

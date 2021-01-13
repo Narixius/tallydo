@@ -50,17 +50,18 @@
     "dev": "yarn tailwind:compile && react-scripts start",
     "start": "react-scripts start",
     "build": "cross-env NODE_ENV=production yarn tailwind:compile && react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "tailwind:compile": "postcss src/tailwind.css -o public/assets/tailwind.css",
     "tailwind:watch": "postcss src/tailwind.css -o public/assets/tailwind.css --watch",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "test": "run-p test:*",
+    "test:server": "http-server -p 8888 ./dist > /dev/null 2>&1 &",
+    "test:run": "node ./test/AddTodo.test.js"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {

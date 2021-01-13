@@ -1,0 +1,38 @@
+name: learn-github-actions
+on: [push]
+jobs:
+    test-tunnel:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v1
+
+            - name: Install Node.js, NPM and Yarn
+              uses: actions/setup-node@v1
+              with:
+                node-version: 12
+            - run: npm install
+
+            - name: Start Tunnel
+              uses: LambdaTest/LambdaTest-tunnel-action@v1
+              id: tunnel
+              with:
+                user: ${{ secrets.LT_EMAIL }}
+                accessKey: ${{ secrets.LT_ACCESS_KEY }}
+                tunnelName: "testTunnel"
+
+            - name: Run Test Case
+              env:
+                username: ${{ secrets.LT_USERNAME }}
+                accessKey: ${{ secrets.LT_ACCESS_KEY }}
+                tunnelName: "test tunnel"
+
+              run: npm run build
+              run: npm test
+
+            - name: Export Tunnel Logs for debugging
+              uses: actions/upload-artifact@v2
+
+              with:
+                name: tunnel_logs
+                path: ${{ steps.tunnel.outputs.logFileName }}

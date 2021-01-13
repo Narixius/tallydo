@@ -61,7 +61,7 @@
     "deploy": "gh-pages -d build",
     "test-p": "run-p test:*",
     "test:server": "http-server -p 8888 ./build",
-    "test:run": "node ./tests/AddTodo.test.js",
+    "test:run": "node ./tests/AddTodo-dw.test.js & node ./tests/AddTodo-ma.test.js &  node ./tests/AddTodo-dm.test.js &  node ./tests/AddTodo-mi.test.js",
     "test": "start-server-and-test test:server 8888 test:run"
   },
   "eslintConfig": {

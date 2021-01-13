@@ -6,9 +6,10 @@ const {By} = webdriver;
 async function executeTest() {
     // Setup Input capabilities
     const capabilities = {
-        platform: 'windows 10',
-        browserName: 'chrome',
-        version: '75.0',
+        platform: 'Android',
+        deviceName: 'Galaxy S7',
+        platformVersion: '8',
+        browserName: 'Chrome',
         tunnel: true,
         video: true,
         tunnelName: process.env.LT_TUNNEL_NAME,
@@ -27,16 +28,30 @@ async function executeTest() {
     try {
         await driver.get('http://localhost:8888/')
 
+        try{
+            await driver.findElement(By.css('.w-20')).click()
+        }catch(err){
+            console.log("desktop")
+        }
 
         await driver.findElement(webdriver.By.css('.px-4')).click()
         await driver.findElement(webdriver.By.css('.px-4')).sendKeys('Coffee time')
         await driver.findElement(webdriver.By.css('.bg-indigo-500 > span')).click()
         await driver.findElement(webdriver.By.css('.tag:nth-child(2) > span')).click()
-        await driver.findElement(webdriver.By.css('.add')).click()
+        await driver.findElement(webdriver.By.css('.add')).click();
+
+        await driver.sleep(1000)
+
+
+        try {
+            await driver.findElement(By.css('.w-20')).click()
+        } catch (err) {
+            console.log('desktop')
+        }
+
 
         const addedItem = await driver.findElement( By.css('span.ml-2.font-medium.w-full.truncate'))
 
-        await driver.sleep(1000);
 
 
         assert.strictEqual(await addedItem.getText(), 'Coffee time')

@@ -23,11 +23,12 @@ jobs:
         with:
           user: ${{ secrets.LT_EMAIL }}
           accessKey: ${{ secrets.LT_ACCESS_KEY }}
-          tunnelName: "testTunnel"
-        - run: npm test
+          tunnelName: testTunnel
 
-        - name: Export Tunnel Logs for debugging
-          uses: actions/upload-artifact@v2
-          with:
-            name: tunnel_logs
-            path: ${{ steps.tunnel.outputs.logFileName }}
+      - run: npm test
+
+      - name: Export Tunnel Logs for debugging
+        uses: actions/upload-artifact@v2
+        with:
+          name: tunnel_logs
+          path: ${{ steps.tunnel.outputs.logFileName }}

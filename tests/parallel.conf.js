@@ -23,8 +23,8 @@ exports.config = {
         },
         {
             browserName: 'Safari',
-            version: 'latest',
-            platform: 'macOS Mojave',
+            version: '10.0',
+            platform: 'macOS Sierra',
         },
         {
             browserName: 'Firefox',
